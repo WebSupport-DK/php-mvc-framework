@@ -1,6 +1,6 @@
 <?php
 
-namespace thom855j\mvc ;
+namespace thom855j\PHPMvc ;
 
 use thom855j\sql\DB ;
 

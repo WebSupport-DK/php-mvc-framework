@@ -1,5 +1,5 @@
 <?php
-namespace thom855j\mvc;
+namespace thom855j\PHPMvc;
 
 /**
  * Class View

@@ -1,6 +1,7 @@
 <?php
 
-namespace thom855j\mvc ;
+namespace thom855j\PHPMvc ;
+use thom855j\PHPMvc\View;
 
 /**
  * This is the "base controller class". All other "real" controllers extend this class.
@@ -22,7 +23,7 @@ class Controller
     public
             function __construct()
     {
-        // always initialize a session
+        // always initialize a session, if it not exists
         if ( session_id() == '' )
         {
             session_start() ;
