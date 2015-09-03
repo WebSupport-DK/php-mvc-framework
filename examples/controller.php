@@ -6,7 +6,8 @@ require_once '../Model.php';
 require_once '../View.php';
 
 // use the controller class
-use thom855j\PHPMvc\Controller;
+use thom855j\PHPMvc\Controller,
+ thom855j\PHPMvc\Model;
 
 // we create a controller class that extends our main controlelr
 class TestController extends Controller
@@ -23,13 +24,10 @@ class TestController extends Controller
     public
             function index()
     {
-        // data from db or else where
-        $data = array(
-            'Test' => array(
-                'id'   => 2,
-                'name' => 'Test'
-            )
-        );
+        // data from db or else where. 
+        // the model is an abstract example of how a model can be created.
+        // this one is set to function together with PHPSql\DB class.
+        $data = Model::load()->read();
         
         // render view inside this controllers action
         $this->View->render(array(

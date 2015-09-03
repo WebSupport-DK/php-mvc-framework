@@ -33,12 +33,14 @@ abstract
         $this->columns = array() ;
     }
 
+    // init a singleton object of class
     public static
             function load( $storage = null )
     {
         if ( !isset( self::$_instance ) )
         {
-            self::$_instance = new Model( $storage ) ;
+            // absctract models cannot be instanciated. But yours can!
+            //self::$_instance = new Model( $storage ) ;
         }
         return self::$_instance ;
     }
