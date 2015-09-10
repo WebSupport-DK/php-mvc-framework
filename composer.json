@@ -1,5 +1,5 @@
 {
-        "name": "thom855j/php-mvc",
+        "name": "thom855j/php-mvcf",
         "version": "dev-master",
         "license": "MIT",
         "description": "Useful classes for creating a php mvc app",
@@ -8,7 +8,7 @@
         },
     "autoload": {
         "psr-4": {
-            "thom855j\\PHPMvc\\": "src/"
+            "thom855j\\PHPMvcf\\": "src/"
             }
         }
 }
