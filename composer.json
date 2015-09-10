@@ -1,8 +1,14 @@
 {
         "name": "thom855j/php-mvc",
+        "version": "dev-master",
         "license": "MIT",
         "description": "Useful classes for creating a php mvc app",
         "require": {
         "php": ">=5.4.0"
+        },
+    "autoload": {
+        "psr-4": {
+            "thom855j\\PHPMvc\\": "src/"
+            }
         }
 }
