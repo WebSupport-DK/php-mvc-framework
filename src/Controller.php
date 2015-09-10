@@ -1,6 +1,6 @@
 <?php
 
-namespace thom855j\PHPMvc ;
+namespace thom855j\PHPMvcFramework ;
 use thom855j\PHPMvc\View;
 
 /**
