@@ -1,8 +1,8 @@
 <?php
 
-namespace thom855j\PHPMvc ;
+namespace thom855j\PHPMvcf;
 
-use thom855j\PHPSql\DB ;
+use thom855j\PHPScrud\DB ;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
