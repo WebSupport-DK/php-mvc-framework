@@ -1,0 +1,8 @@
+{
+        "name": "thom855j/php-mvc",
+        "license": "MIT",
+        "description": "Useful classes for creating a php mvc app",
+        "require": {
+        "php": ">=5.4.0"
+        }
+}
