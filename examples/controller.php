@@ -1,9 +1,9 @@
 <?php
 
 // load classes
-require_once '../Controller.php';
-require_once '../Model.php';
-require_once '../View.php';
+require_once '../src/Controller.php';
+require_once '../src/Model.php';
+require_once '../src/View.php';
 
 // use the controller class
 use thom855j\PHPMvc\Controller,
