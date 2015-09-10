@@ -1,7 +1,7 @@
 <?php
 
-namespace thom855j\PHPMvc ;
-use thom855j\PHPMvc\View;
+namespace thom855j\php-mvc ;
+use thom855j\php-mvc\View;
 
 /**
  * This is the "base controller class". All other "real" controllers extend this class.
