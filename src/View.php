@@ -1,5 +1,5 @@
 <?php
-namespace thom855j\PHPMvcFramework;
+namespace thom855j\PHPMvc;
 
 /**
  * Class View
@@ -18,6 +18,12 @@ class View
     public
             function render($filenames = array(), $data = null)
     {
+        
+         if ($data) {
+            foreach ($data as $key => $value) {
+                $this->{$key} = $value;
+            }
+        }
 
         foreach ($filenames as $filename)
         {
@@ -44,7 +50,7 @@ class View
     {
         // echo out the feedback messages (errors and success messages etc.),
         // they are in $_SESSION["feedback_positive"] and $_SESSION["feedback_negative"]
-        require_once PATH_LIBS . 'common/templates/system/feedback.php';
+        require_once $path;
         // delete these messages (as they are not needed anymore and we want to avoid to show them twice
     }
 
