@@ -81,23 +81,19 @@ abstract
         }
     }
 
-    // get page by specific search
+    // get page by specific search 
     public
-            function get( $where = array( array() ) ,
-                          $paging = array( 'start' , 'end' , 'max' ) ,
-                          $options = array() )
+            function get($where, $paging = array(), $options = array())
     {
 
-        if ( !empty( $paging ) )
+        if (!empty($paging))
         {
-            return $this->paging( $paging[ 'start' ] , $paging[ 'end' ] ,
-                                  $paging[ 'max' ] , $where , $options ) ;
+            return $this->paging($paging['start'], $paging['end'], $paging['max'], $where, $options);
         }
         else
         {
-            $this->storage->select( array( $this->rows ) , $this->table ,
-                                      $where , $options ) ;
-            return $this->storage->results() ;
+            $this->_db->select(array($this->_rows), $this->_table, $where, $options);
+            return $this->_db->results();
         }
     }
 
@@ -109,22 +105,16 @@ abstract
     }
 
     public
-            function paging( $start , $end , $max , $where = array( array() ) ,
-                             $options = null )
+            function paging($start, $end, $max)
     {
 
-        $page    = isset( $start ) ? ( int ) $start : 1 ;
-        $perPage = isset( $end ) && $end <= $max ? ( int ) $end : 5 ;
+        $page    = isset($start) ? (int) $start : 1;
+        $this->_perPage = isset($end) && $end <= $max ? (int) $end : 5;
 
-        $pages = ($page > 1) ? ($page * $perPage) - $perPage : 0 ;
+        $this->_pages = ($page > 1) ? ($page *   $this->_perPage ) -   $this->_perPage  : 0;
 
-        $this->total = (ceil( $this->count()[ 0 ]->Total / $perPage )) ;
+        $this->_total = (ceil($this->count()[0]->Total /   $this->_perPage ));
 
-        $this->storage->select( array( $this->rows ) , $this->table , $where ,
-                                  array( 'ORDER BY ID' => 'DESC' , 'LIMIT' => "$pages,$perPage" ) ) ;
-
-
-        return $this->storage->results() ;
     }
 
     public
