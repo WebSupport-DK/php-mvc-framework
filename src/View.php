@@ -1,5 +1,5 @@
 <?php
-namespace thom855j\PHPMvcFramework;
+namespace WebSupportDK\PHPMvcFramework;
 
 /**
  * Class View
