@@ -1,5 +1,5 @@
 {
-        "name": "thom855j/php-mvc-framework",
+        "name": "websupport-dk/php-mvc-framework",
         "version": "dev-master",
         "license": "MIT",
         "description": "Useful classes for creating a php mvc app",
@@ -8,7 +8,7 @@
         },
     "autoload": {
         "psr-4": {
-            "thom855j\\PHPMvcFramework\\": "src/"
+            "WebSupportDK\\PHPMvcFramework\\": "src/"
             }
         }
 }
