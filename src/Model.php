@@ -1,8 +1,8 @@
 <?php
 
-namespace thom855j\PHPMvcFramework;
+namespace WebSupportDK\PHPMvcFramework;
 
-use thom855j\PHPScrud\DB ;
+use WebSupportDK\PHPScrud\DB ;
 
 /*
  * THIS IS JUST an example model to show how to use
