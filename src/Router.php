@@ -1,31 +1,28 @@
 <?php
-/*
- * Router Class 
- *  
- * responsible for fechting the write controller-classes  
- * and methods according to the "index.php?url=[controller class]/[method]/[parameters]"  URL. 
- * protected $variable = Only accessible inside this class and childs! 
+/**
+ * Router Class
+ *
+ * Responsible for fechting the write controller-classes
+ * and methods according to the "index.php?url=[controller class]/[method]/[parameters]"  URL.
+ * protected $variable = Only accessible inside this class and childs!
  */
 namespace WebSupportDK\PHPMvcFramework;
 
 class Router
 {
 
-	// object instance
-	private static $_instance = NULL;
 	// class params
-	protected $_info;
+	private $_info;
 	//url
 	public
 		$url,
-		$params = array();
+		$param = array();
 
-	/*
-	 * fetching the controller class and its methods  
-	 * happens in the contructer doing every run 
+	/**
+	 * Fetching the controller class and its methods
+	 * happens in the contructer doing every run.
 	 */
-
-	private function __construct($params = array())
+	public function __construct($params = array())
 	{
 		if (!empty($params)) {
 			foreach ($params as $key => $value) {
@@ -39,39 +36,24 @@ class Router
 				'path_controller' => ''
 			);
 		}
-		// use this class method to parse the $_GET[url] 
-		$this->url = self::parseUrl($this->_info['root_url']);
+		// use this class method to parse the $_GET[url]
+		$this->url = $this->_parseUrl($this->_info['root_url']);
 
 		if (!empty($this->url)) {
 			$this->_info['controller'] = ucfirst($this->url[0]);
 		} else {
 			$this->url = array($this->_info['controller'], $this->_info['action']);
 		}
-	}
-	/*
-	 * Instantiate object
-	 */
 
-	public static function load($params = array())
-	{
-		if (!isset(self::$_instance)) {
-			self::$_instance = new Router($params = array());
-		}
-		return self::$_instance;
-	}
-
-	public function run()
-	{
-
-		// checks if a controller by the name from the URL exists 
+		// checks if a controller by the name from the URL exists
 		if (ctype_lower(str_replace('_', '', $this->url[0])) && file_exists($this->_info['path_controller'] . $this->_info['controller'] . 'Controller.php')) {
 
-			// if exists, use this as the controller instead of default 
+			// if exists, use this as the controller instead of default
 			$this->_info['controller'] = $this->_info['controller'] . 'Controller';
 
 			/*
-			 * destroys the first URL parameter, 
-			 *  to leave it like index.php?url=[0]/[1]/[parameters in array seperated by "/"] 
+			 * destroys the first URL parameter,
+			 *  to leave it like index.php?url=[0]/[1]/[parameters in array seperated by "/"]
 			 */
 			unset($this->url[0]);
 		} else {
@@ -79,24 +61,24 @@ class Router
 		}
 
 		#var_dump($path);
-		// use the default controller if file NOT exists, or else use the controller name from the URL 
+		// use the default controller if file NOT exists, or else use the controller name from the URL
 		require_once $this->_info['path_controller'] . $this->_info['controller'] . '.php';
 
-		// initiate the controller class as an new object 
+		// initiate the controller class as an new object
 		$this->_info['controller'] = new $this->_info['controller'];
 
-		// checks for if a second url parameter like index.php?url=[0]/[1] is set 
+		// checks for if a second url parameter like index.php?url=[0]/[1] is set
 		if (!empty($this->url)) {
 
-			// then check if an according method exists in the controller from $url[0] 
+			// then check if an according method exists in the controller from $url[0]
 			if (method_exists($this->_info['controller'], $this->url[1])) {
 
-				// if exists, use this as the method instead of default 
+				// if exists, use this as the method instead of default
 				$this->_info['action'] = $this->url[1];
 
 				/*
-				 * destroys the second URL, to leave only the parameters 
-				 *  left like like index.php?url=[parameters in array seperated by "/"] 
+				 * destroys the second URL, to leave only the parameters
+				 *  left like like index.php?url=[parameters in array seperated by "/"]
 				 */
 				unset($this->url[1]);
 			} else {
@@ -104,35 +86,32 @@ class Router
 			}
 		}
 
-		/*
-		 * checks if the $_GET['url'] has any parameters left in the   
-		 * index.php?url=[parameters in array seperated by "/"]. 
-		 * If it has, get all the values. Else, just parse is as an empty array. 
+		/**
+		 * checks if the $_GET['url'] has any parameters left in the
+		 * index.php?url=[parameters in array seperated by "/"].
+		 * If it has, get all the values. Else, just parse is as an empty array.
 		 */
 		$this->params = $this->url ? array_values($this->url) : array();
 
-		/*
-		 * 1. call/execute the controller and it's method.  
-		 * 2. If the Router has NOT changed them, use the default controller and method. 
-		 * 2. if there are any params, return these too. Else just return an empty array. 
+		/**
+		 * 1. call/execute the controller and it's method.
+		 * 2. If the Router has NOT changed them, use the default controller and method.
+		 * 2. if there are any params, return these too. Else just return an empty array.
 		 */
 		call_user_func_array(array($this->_info['controller'], $this->_info['action']), $this->params);
 	}
-	/*
-	 * The parUrl method is responsible for getting the $_GET['url']-parameters  
-	 * as an array, for sanitizing it for anything we don't want and removing "/"-slashes  
-	 * after the URL-parameter 
-	 */
 
-	public static function parseUrl($name, $array = TRUE)
+	/**
+	 * The parUrl method is responsible for getting the $_GET['url']-parameters
+	 * as an array, for sanitizing it for anything we don't want and removing "/"-slashes
+	 * after the URL-parameter
+	 */
+	private function _parseUrl($name)
 	{
 
-		if (isset($_GET[$name]) && $array === TRUE) {
+		if (isset($_GET[$name])) {
 			return explode('/', filter_var(rtrim($_GET[$name], '/'), FILTER_SANITIZE_URL));
-		} elseif (isset($_GET[$name]) && $array === FALSE) {
-			return filter_var(rtrim($_GET[$name], '/'), FILTER_SANITIZE_URL);
-		} else {
-			return FALSE;
 		}
+		return FALSE;
 	}
 }
