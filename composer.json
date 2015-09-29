@@ -5,7 +5,7 @@
 	"description": "Useful classes for creating a php mvc app",
 	"require": {
 		"php": ">=5.5.0",
-		"websupport-dk": "php-scrud"
+		"websupport-dk/php-scrud": "dev-master"
 	},
 	"autoload": {
 		"psr-4": {
