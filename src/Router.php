@@ -33,9 +33,30 @@ class Router
 				'controller' => 'default',
 				'action' => 'index',
 				'root_url' => 'url',
-				'path_controller' => ''
+				'path_controllers' => ''
 			);
 		}
+	}
+
+	/**
+	 * The parUrl method is responsible for getting the $_GET['url']-parameters
+	 * as an array, for sanitizing it for anything we don't want and removing "/"-slashes
+	 * after the URL-parameter
+	 */
+	private function _parseUrl($name)
+	{
+
+		if (isset($_GET[$name])) {
+			return explode('/', filter_var(rtrim($_GET[$name], '/'), FILTER_SANITIZE_URL));
+		}
+		return FALSE;
+	}
+
+	/**
+	 * Start routing
+	 */
+	public function run()
+	{
 		// use this class method to parse the $_GET[url]
 		$this->url = $this->_parseUrl($this->_info['root_url']);
 
@@ -46,7 +67,7 @@ class Router
 		}
 
 		// checks if a controller by the name from the URL exists
-		if (ctype_lower(str_replace('_', '', $this->url[0])) && file_exists($this->_info['path_controller'] . $this->_info['controller'] . 'Controller.php')) {
+		if (ctype_lower(str_replace('_', '', $this->url[0])) && file_exists($this->_info['path_controllers'] . $this->_info['controller'] . 'Controller.php')) {
 
 			// if exists, use this as the controller instead of default
 			$this->_info['controller'] = $this->_info['controller'] . 'Controller';
@@ -99,19 +120,5 @@ class Router
 		 * 2. if there are any params, return these too. Else just return an empty array.
 		 */
 		call_user_func_array(array($this->_info['controller'], $this->_info['action']), $this->params);
-	}
-
-	/**
-	 * The parUrl method is responsible for getting the $_GET['url']-parameters
-	 * as an array, for sanitizing it for anything we don't want and removing "/"-slashes
-	 * after the URL-parameter
-	 */
-	private function _parseUrl($name)
-	{
-
-		if (isset($_GET[$name])) {
-			return explode('/', filter_var(rtrim($_GET[$name], '/'), FILTER_SANITIZE_URL));
-		}
-		return FALSE;
 	}
 }
