@@ -13,6 +13,22 @@ class App extends Router
 	private
 		$_data;
 
+	public function __construct($params)
+	{
+		if (!empty($params)) {
+			foreach ($params as $key => $value) {
+				$this->_info[$key] = $value;
+			}
+		} else {
+			$this->_info = array(
+				'controller' => 'default',
+				'action' => 'index',
+				'root_url' => 'url',
+				'path_controllers' => ''
+			);
+		}
+	}
+
 	// singleton instance
 	public static function load()
 	{
@@ -34,8 +50,8 @@ class App extends Router
 		return $this->_data[$case];
 	}
 
-	public function run($params)
+	public function run()
 	{
-		parent::__construct($params);
+		parent::__construct($this->_info);
 	}
 }
