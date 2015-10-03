@@ -10,7 +10,7 @@ class View
 
 	// object instance 
 	private static $_instance = null;
-	private $_templates;
+	public $templates;
 
 	public static function load()
 	{
@@ -38,7 +38,7 @@ class View
 
 		// requireing views
 		foreach ($filenames as $filename) {
-			require_once $this->_templates['path'] . $this->_templates['template'] . $filename . '.php';
+			require_once $this->templates['path'] . $this->templates['template'] . $filename . '.php';
 		}
 	}
 
@@ -58,22 +58,22 @@ class View
 	{
 		// echo out the feedback messages (errors and success messages etc.),
 		// they are in $_SESSION["feedback_positive"] and $_SESSION["feedback_negative"]
-		require_once $this->_templates['feedback'];
+		require_once $this->templates['feedback'];
 		// delete these messages (as they are not needed anymore and we want to avoid to show them twice
 	}
 
 	public function setTemplatesPath($path)
 	{
-		$this->_templates['path'] = $path . DIRECTORY_SEPARATOR;
+		$this->templates['path'] = $path . DIRECTORY_SEPARATOR;
 	}
 
 	public function setFeedbackFile($file)
 	{
-		$this->_templates['feedback'] = $file . '.php';
+		$this->templates['feedback'] = $file . '.php';
 	}
 
 	public function setTemplate($template = '')
 	{
-		$this->_templates['template'] = $template . DIRECTORY_SEPARATOR;
+		$this->templates['template'] = $template . DIRECTORY_SEPARATOR;
 	}
 }
