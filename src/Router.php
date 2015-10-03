@@ -12,7 +12,7 @@ class Router
 {
 
 	// class params
-	private $_info;
+	protected $_info;
 	//url
 	public
 		$url,
