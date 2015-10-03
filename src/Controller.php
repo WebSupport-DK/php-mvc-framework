@@ -30,7 +30,7 @@ class Controller
 		}
 
 		// create a view object to be able to use it inside a controller, like $this->View
-		$this->View = new View();
+		$this->View = View::load();
 		// create a app object to be able to use it inside a controller, like $this->App
 		$this->_App = App::load();
 	}
