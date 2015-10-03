@@ -38,7 +38,7 @@ class View
 
 		// requireing views
 		foreach ($filenames as $filename) {
-			$this->_templates['path'] . $this->_templates['template'] . $filename . '.php';
+			require_once $this->_templates['path'] . $this->_templates['template'] . $filename . '.php';
 		}
 	}
 
