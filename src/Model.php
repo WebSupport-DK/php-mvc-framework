@@ -9,10 +9,10 @@ use WebSupportDK\PHPScrud\DB;
 class Model
 {
 
-	protected $_db;
+	protected $_DB;
 
 	protected function __construct()
 	{
-		$this->_db = DB::load();
+		$this->_DB = DB::load();
 	}
 }

@@ -8,12 +8,14 @@
 namespace WebSupportDK\PHPMvcFramework;
 
 use WebSupportDK\PHPMvcFramework\View;
+use WebSupportDK\PHPMvcFramework\App;
 
 class Controller
 {
 
 	/** @var View View The view object */
 	public $View;
+	protected $_App;
 
 	/**
 	 * Construct the (base) controller. This happens when a real controller is constructed, like in
@@ -27,7 +29,9 @@ class Controller
 			session_start();
 		}
 
-		// create a view object to be able to use it inside a controller, like $this->View->render();
+		// create a view object to be able to use it inside a controller, like $this->View
 		$this->View = new View();
+		// create a app object to be able to use it inside a controller, like $this->App
+		$this->_App = App::load();
 	}
 }
