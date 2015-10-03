@@ -63,7 +63,7 @@ class Router
 
 		#var_dump($path);
 		// use the default controller if file NOT exists, or else use the controller name from the URL
-		require_once $this->_info['path_controller'] . $this->_info['controller'] . '.php';
+		require_once $this->_info['path_controllers'] . $this->_info['controller'] . '.php';
 
 		// initiate the controller class as an new object
 		$this->_info['controller'] = new $this->_info['controller'];
