@@ -40,7 +40,7 @@ class App extends Router
 		return self::$_instance;
 	}
 
-	public function register($case, $input)
+	public function set($case, $input)
 	{
 		static $data = array();
 		array_push($data, $input);
