@@ -32,10 +32,10 @@ class App extends Router
 	}
 
 	// singleton instance
-	public static function load()
+	public static function load($params = null)
 	{
 		if (!isset(self::$_instance)) {
-			self::$_instance = new App();
+			self::$_instance = new App($params);
 		}
 		return self::$_instance;
 	}
