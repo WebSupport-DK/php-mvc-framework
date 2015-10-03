@@ -36,28 +36,8 @@ class Router
 				'path_controllers' => ''
 			);
 		}
-	}
-
-	/**
-	 * The parUrl method is responsible for getting the $_GET['url']-parameters
-	 * as an array, for sanitizing it for anything we don't want and removing "/"-slashes
-	 * after the URL-parameter
-	 */
-	private function _parseUrl($name)
-	{
-
-		if (isset($_GET[$name])) {
-			return explode('/', filter_var(rtrim($_GET[$name], '/'), FILTER_SANITIZE_URL));
-		}
-		return FALSE;
-	}
-
-	/**
-	 * Start routing
-	 */
-	public function run()
-	{
-		// use this class method to parse the $_GET[url]
+		
+				// use this class method to parse the $_GET[url]
 		$this->url = $this->_parseUrl($this->_info['root_url']);
 
 		if (!empty($this->url)) {
@@ -120,5 +100,19 @@ class Router
 		 * 2. if there are any params, return these too. Else just return an empty array.
 		 */
 		call_user_func_array(array($this->_info['controller'], $this->_info['action']), $this->params);
+	}
+
+	/**
+	 * The parUrl method is responsible for getting the $_GET['url']-parameters
+	 * as an array, for sanitizing it for anything we don't want and removing "/"-slashes
+	 * after the URL-parameter
+	 */
+	private function _parseUrl($name)
+	{
+
+		if (isset($_GET[$name])) {
+			return explode('/', filter_var(rtrim($_GET[$name], '/'), FILTER_SANITIZE_URL));
+		}
+		return FALSE;
 	}
 }
