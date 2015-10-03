@@ -22,7 +22,7 @@ class Router
 	 * Fetching the controller class and its methods
 	 * happens in the contructer doing every run.
 	 */
-	public function __construct($params = array())
+	public function __construct($params = array(), $object = null)
 	{
 		if (!empty($params)) {
 			foreach ($params as $key => $value) {
@@ -36,8 +36,8 @@ class Router
 				'path_controllers' => ''
 			);
 		}
-		
-				// use this class method to parse the $_GET[url]
+
+		// use this class method to parse the $_GET[url]
 		$this->url = $this->_parseUrl($this->_info['root_url']);
 
 		if (!empty($this->url)) {
@@ -66,7 +66,7 @@ class Router
 		require_once $this->_info['path_controllers'] . $this->_info['controller'] . '.php';
 
 		// initiate the controller class as an new object
-		$this->_info['controller'] = new $this->_info['controller'];
+		$this->_info['controller'] = new $this->_info['controller']($object);
 
 		// checks for if a second url parameter like index.php?url=[0]/[1] is set
 		if (!empty($this->url)) {

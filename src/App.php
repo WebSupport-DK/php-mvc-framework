@@ -74,8 +74,8 @@ class App extends Router
 		}
 	}
 
-	public function run()
+	public function run($object = null)
 	{
-		parent::__construct($this->_info);
+		parent::__construct($this->_info, $object);
 	}
 }
