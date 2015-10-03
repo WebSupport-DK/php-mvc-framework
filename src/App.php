@@ -2,6 +2,8 @@
 /**
  * MVC App
  */
+namespace WebSupportDK\PHPMvcFramework;
+
 use WebSupportDK\PHPMvcFramework\Router;
 
 class App extends Router

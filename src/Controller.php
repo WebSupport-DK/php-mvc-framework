@@ -23,6 +23,7 @@ class Controller
 	{
 		// always initialize a session, if it not exists
 		if (session_id() == '') {
+			session_cache_limiter(false);
 			session_start();
 		}
 
