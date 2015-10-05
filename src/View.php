@@ -10,7 +10,7 @@ class View
 
 	// object instance 
 	private static $_instance = null;
-	protected $template;
+	public $template;
 
 	public static function load()
 	{
