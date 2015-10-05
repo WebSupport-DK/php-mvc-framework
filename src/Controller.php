@@ -14,8 +14,7 @@ class Controller
 {
 
 	/** @var View View The view object */
-	public $View;
-	protected $_App;
+	public $View, $App;
 
 	/**
 	 * Construct the (base) controller. This happens when a real controller is constructed, like in
@@ -32,6 +31,6 @@ class Controller
 		// create a view object to be able to use it inside a controller, like $this->View
 		$this->View = View::load();
 		// create a app object to be able to use it inside a controller, like $this->App
-		$this->_App = App::load();
+		$this->App = App::load();
 	}
 }

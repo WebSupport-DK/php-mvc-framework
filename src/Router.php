@@ -23,16 +23,24 @@ class Router
 	 * Default params are:
 	 * array('controller' =>'default','action'=>'index','path_controllers' => '', 'root_url'=> 'url')
 	 */
-	public function __construct($params = array(), $object = null)
+	public function __construct($params = array())
 	{
-		if (empty($params)) {
-			return FALSE;
+		if (!empty($params)) {
+			foreach ($params as $key => $value) {
+				$this->_info[$key] = $value;
+			}
+		} else {
+			$this->_info = array(
+				'controller' => 'default',
+				'action' => 'index',
+				'root_url' => 'url',
+				'path_controllers' => ''
+			);
 		}
+	}
 
-		foreach ($params as $key => $value) {
-			$this->_info[$key] = $value;
-		}
-
+	public function run($object = null)
+	{
 		// use this class method to parse the $_GET[url]
 		$this->_url = $this->_parseUrl($this->_info['root_url']);
 

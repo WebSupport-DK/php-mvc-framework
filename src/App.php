@@ -4,32 +4,14 @@
  */
 namespace WebSupportDK\PHPMvcFramework;
 
-use WebSupportDK\PHPMvcFramework\Router;
-
-class App extends Router
+class App
 {
 
 	// object instance 
 	private static
 		$_instance = null;
-	private
-		$_data;
-
-	public function bootstrap($params)
-	{
-		if (!empty($params)) {
-			foreach ($params as $key => $value) {
-				$this->_info[$key] = $value;
-			}
-		} else {
-			$this->_info = array(
-				'controller' => 'default',
-				'action' => 'index',
-				'root_url' => 'url',
-				'path_controllers' => ''
-			);
-		}
-	}
+	public
+		$data;
 
 	// singleton instance
 	public static function load()
@@ -42,13 +24,13 @@ class App extends Router
 
 	public function set($case, $input)
 	{
-		return $this->_data[$case] = $input;
+		return $this->data[$case] = $input;
 	}
 
 	public function get($index, $default = null)
 	{
 		$index = explode('.', $index);
-		$data = $this->_getValue($index, $this->_data);
+		$data = $this->_getValue($index, $this->data);
 		if ($data) {
 			return $data;
 		}
@@ -72,10 +54,5 @@ class App extends Router
 		} else {
 			return FALSE;
 		}
-	}
-
-	public function run($object = null)
-	{
-		parent::__construct($this->_info, $object);
 	}
 }
