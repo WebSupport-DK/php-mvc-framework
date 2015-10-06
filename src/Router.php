@@ -11,50 +11,89 @@ namespace WebSupportDK\PHPMvcFramework;
 class Router
 {
 
-	// class params
+// class params
 	protected
-		$_info,
-		$_url,
-		$_params = array();
+		$_path,
+		$_QS,
+		$_controller,
+		$_action,
+		$_params = array(),
+		$_url;
+
+	/*
+	 * Construct with default values
+	 */
+	public function __construct()
+	{
+		$this->_path = '';
+		$this->_controller = 'default';
+		$this->_action = 'index';
+		$this->_QS = 'url';
+	}
+
+	/**
+	 * Set path to controllers
+	 * @param type $path
+	 */
+	public function setControllersPath($path)
+	{
+		$this->_path = $path;
+	}
+
+	/**
+	 * Set default controller
+	 * 
+	 * @param type $name
+	 */
+	public function setDefaultController($name)
+	{
+		$this->_controller = $name;
+	}
+
+	/**
+	 * Set default action
+	 * 
+	 * @param type $name
+	 */
+	public function setDefaultAction($name)
+	{
+		$this->_action = $name;
+	}
+	
+	/**
+	 * Set default query string from $_GET
+	 * 
+	 * @param type $name
+	 */
+	public function setQueryString($name)
+	{
+		$_QS = $name;
+	}
 
 	/**
 	 * Fetching the controller class and its methods
 	 * happens in the contructer doing every run.
 	 * Default params are:
 	 * array('controller' =>'default','action'=>'index','path_controllers' => '', 'root_url'=> 'url')
+	 * $object can be something to pass to the controllers constructer
 	 */
-	public function __construct($params = array())
+	public function run($params = null)
 	{
-		if (!empty($params)) {
-			foreach ($params as $key => $value) {
-				$this->_info[$key] = $value;
-			}
-		} else {
-			$this->_info = array(
-				'controller' => 'default',
-				'action' => 'index',
-				'root_url' => 'url',
-				'path_controllers' => ''
-			);
-		}
-	}
 
-	public function run($object = null)
-	{
 		// use this class method to parse the $_GET[url]
-		$this->_url = $this->_parseUrl($this->_info['root_url']);
+		$this->_url = $this->_parseUrl($this->_QS);
 
 		if (!empty($this->_url)) {
-			$this->_info['controller'] = ucfirst($this->_url[0]);
+			$this->_controller = ucfirst($this->_url[0]);
 		} else {
-			$this->_url = array($this->_info['controller'], $this->_info['action']);
+			$this->_url = array($this->_controller, $this->_action);
 		}
 
 		// checks if a controller by the name from the URL exists
-		if (ctype_lower(str_replace('_', '', $this->_url[0])) && file_exists($this->_info['path_controllers'] . $this->_info['controller'] . 'Controller.php')) {
+		if (ctype_lower(str_replace('_', '', $this->_url[0])) && file_exists($this->_path . $this->_controller . 'Controller.php')) {
 
 			// if exists, use this as the controller instead of default
-			$this->_info['controller'] = $this->_info['controller'] . 'Controller';
+			$this->_controller = ucfirst($this->_controller) . 'Controller';
 
 			/*
 			 * destroys the first URL parameter,
@@ -65,21 +104,21 @@ class Router
 			return header("HTTP/1.0 404 Not Found");
 		}
 
-		#var_dump($path);
+
 		// use the default controller if file NOT exists, or else use the controller name from the URL
-		require_once $this->_info['path_controllers'] . $this->_info['controller'] . '.php';
+		require_once $this->_path . $this->_controller . '.php';
 
 		// initiate the controller class as an new object
-		$this->_info['controller'] = new $this->_info['controller']($object);
+		$this->_controller = new $this->_controller($params);
 
 		// checks for if a second url parameter like index.php?url=[0]/[1] is set
 		if (!empty($this->_url)) {
 
 			// then check if an according method exists in the controller from $url[0]
-			if (method_exists($this->_info['controller'], $this->_url[1])) {
+			if (method_exists($this->_controller, $this->_url[1])) {
 
 				// if exists, use this as the method instead of default
-				$this->_info['action'] = $this->_url[1];
+				$this->_action = $this->_url[1];
 
 				/*
 				 * destroys the second URL, to leave only the parameters
@@ -103,7 +142,7 @@ class Router
 		 * 2. If the Router has NOT changed them, use the default controller and method.
 		 * 2. if there are any params, return these too. Else just return an empty array.
 		 */
-		call_user_func_array(array($this->_info['controller'], $this->_info['action']), $this->_params);
+		call_user_func_array(array($this->_controller, $this->_action), $this->_params);
 	}
 
 	/**
