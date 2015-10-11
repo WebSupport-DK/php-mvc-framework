@@ -14,7 +14,7 @@ class Router
 // class params
     protected
         $_path,
-        $_QS,
+        $_queryString,
         $_controller,
         $_action,
         $_params = array(),
@@ -29,7 +29,7 @@ class Router
         $this->_path = '';
         $this->_controller = 'default';
         $this->_action = 'index';
-        $this->_QS = 'url';
+        $this->_queryString = 'url';
     }
 
     /**
@@ -68,7 +68,7 @@ class Router
      */
     public function setQueryString($name)
     {
-        $_QS = $name;
+        $this->_queryString = $name;
     }
 
     /**
@@ -82,7 +82,7 @@ class Router
     {
 
         // use this class method to parse the $_GET[url]
-        $this->_url = $this->_parseUrl($this->_QS);
+        $this->_url = $this->_parseUrl($this->_queryString);
 
         if (!empty($this->_url)) {
             $this->_controller = ucfirst($this->_url[0]);
