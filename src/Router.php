@@ -91,7 +91,7 @@ class Router
         }
 
         // checks if a controller by the name from the URL exists
-        if (str_replace('_', '', $this->_url[0]) && file_exists($this->_path . ucfirst($this->_controller) . 'Controller.php')) {
+        if (str_replace('-', '', $this->_url[0]) && file_exists($this->_path . ucfirst($this->_controller) . 'Controller.php')) {
 
             // if exists, use this as the controller instead of default
             $this->_controller = ucfirst($this->_controller) . 'Controller';
