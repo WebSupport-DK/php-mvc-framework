@@ -22,12 +22,6 @@ class Controller
 	 */
 	protected function __construct()
 	{
-		// always initialize a session, if it not exists
-		if (session_id() == '') {
-			session_cache_limiter(false);
-			session_start();
-		}
-
 		// create a view object to be able to use it inside a controller, like $this->View
 		$this->View = View::load();
 		// create a app object to be able to use it inside a controller, like $this->App
