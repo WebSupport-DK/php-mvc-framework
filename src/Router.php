@@ -72,6 +72,16 @@ class Router
 	{
 		$this->_queryString = $name;
 	}
+	
+		/**
+	 * Set default namespace for psr-2 autoloading
+	 * 
+	 * @param type $name
+	 */
+	public function setNamespace($name)
+	{
+		$this->_namespace = $name;
+	}
 
 	/**
 	 * Fetching the controller class and its methods
