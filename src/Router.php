@@ -29,7 +29,7 @@ class Router
         $this->_path = '';
         $this->_controller = 'default';
         $this->_action = 'index';
-        $this->_queryString = 'url';
+        $this->_queryString = 'uri';
     }
 
     /**
