@@ -3,38 +3,28 @@
 ini_set('display_errors', true);
 // load
 require_once '../../src/Router.php';
-require_once '../../src/Url.php';
+require_once '../../src/App.php';
 
-//// use class
-//use thom855j\PHPHttp\Router;
-//
-//// return a controller from url with query "index?url"
-//// and the paths to controllers to look ind
-//$router = new Router('url', 'path/to/controllers/');
-//
-//// returns current host
-//Router::getHost();
-//
-//// current root of current project url.
-//// If project rewrites inside a folder, it can be removed from the return url
-//Router::getProjectUrl($path = '');
-//
-//// return url protocol
-//Router::getProtocol();
-//
-//// returns all of current url
-//Router::getUrl();
-//
-//// return either the $_GET url in form of array or string if array is true or false
-//Router::parseUrl($name = '', $array = null);
-use thom855j\PHPMvcFramework\Router;
+// manuelly loading the controllers (Easier with composer)
+require_once 'App/Controllers/DefaultController.php';
+require_once 'App/Controllers/ErrorController.php';
+require_once 'App/Controllers/HomeController.php';
 
-Router::load(
-        array(
-            'controller'      => 'test',
-            'action'          => 'index',
-            'root_url'        => 'url',
-            'path_controller' => ''
-        )
-)->run();
+use WebSupportDK\PHPMvcFramework\App;
+
+// Load app
+$app = App::load();
+
+// Config Router
+$app->set('Router', new WebSupportDK\PHPMvcFramework\Router);
+$app->get('Router')->setControllersPath('App/Controllers/');
+$app->get('Router')->setDefaultController('Default');
+$app->get('Router')->setDefaultAction('index');
+$app->get('Router')->setQueryString('url');
+$app->get('Router')->setNamespace("App\Controllers");
+
+print_r($app->get('Router'));
+
+// Run Router
+$app->get('Router')->run();
 

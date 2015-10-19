@@ -6,8 +6,8 @@ require_once '../src/Model.php';
 require_once '../src/View.php';
 
 // use the controller class
-use thom855j\PHPMvc\Controller,
- thom855j\PHPMvc\Model;
+use WebSupportDK\PHPMvcFramework\Controller,
+ WebSupportDK\PHPMvcFramework\Model;
 
 // we create a controller class that extends our main controlelr
 class TestController extends Controller

@@ -37,6 +37,25 @@ class App
 		return FALSE;
 	}
 
+	/**
+	* @param array      $id
+	* @param int|string $position
+ 	* @param mixed      $value
+ 	*/	
+	public function add($id, $value, $position = 1)
+	{
+		if (is_int($position)) {
+   		return array_splice($this->data[$id], $position, 0, $value);
+    	} else {
+        $pos   = array_search($position, array_keys($this->data[$id]));
+       	return $this->data[$id] = array_merge(
+            array_slice($this->data[$id], 0, $pos),
+            $value,
+            array_slice($this->data[$id], $pos)
+        );
+    	}
+	}
+
 	private function _getValue($index, $value)
 	{
 		if (is_array($index) and
