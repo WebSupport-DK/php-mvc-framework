@@ -1,15 +1,15 @@
 {
-	"name": "websupport-dk/php-mvc-framework",
+	"name": "datalaere/php-mvc-framework",
 	"version": "dev-master",
 	"license": "MIT",
 	"description": "Useful classes for creating a php mvc app",
 	"require": {
 		"php": ">=5.5.0",
-		"websupport-dk/php-scrud": "dev-master"
+		"datalaere/php-scrud": "dev-master"
 	},
 	"autoload": {
 		"psr-4": {
-			"WebSupportDK\\PHPMvcFramework\\": "src/"
+			"Datalaere\\PHPMvcFramework\\": "src/"
 		}
 	}
 }

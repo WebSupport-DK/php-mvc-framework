@@ -6,12 +6,12 @@
  * and methods according to the "index.php?url=[controller class]/[method]/[parameters]"  URL.
  * protected $variable = Only accessible inside this class and childs!
  */
-namespace WebSupportDK\PHPMvcFramework;
+
+namespace Datalaere\PHPMvcFramework;
 
 class Router
 {
-
-// class params
+	// class params
 	protected
 		$_path,
 		$_queryString,
@@ -24,7 +24,6 @@ class Router
 	/*
 	 * Construct with default values
 	 */
-
 	public function __construct()
 	{
 		$this->_path = '';
@@ -73,7 +72,7 @@ class Router
 		$this->_queryString = $name;
 	}
 	
-		/**
+	/**
 	 * Set default namespace for psr-2 autoloading
 	 * 
 	 * @param type $name
@@ -92,7 +91,6 @@ class Router
 	 */
 	public function run($params = null)
 	{
-
 		// use this class method to parse the $_GET[url]
 		$this->_uri = $this->_parseUrl($this->_queryString);
 
@@ -103,7 +101,8 @@ class Router
 		}
 
 		// checks if a controller by the name from the URL exists
-		if (str_replace('_', '', $this->_uri[0]) && file_exists($this->_path . ucfirst($this->_controller) . 'Controller.php')) {
+		if (str_replace('_', '', $this->_uri[0]) && 
+			file_exists($this->_path . ucfirst($this->_controller) . 'Controller.php')) {
 
 			// if exists, use this as the controller instead of default
 			$this->_controller = ucfirst($this->_controller) . 'Controller';
@@ -113,6 +112,7 @@ class Router
 			 *  to leave it like index.php?url=[0]/[1]/[parameters in array seperated by "/"]
 			 */
 			unset($this->_uri[0]);
+
 		} else {
 			return header("HTTP/1.0 404 Not Found");
 		}
@@ -136,6 +136,7 @@ class Router
 				 *  left like like index.php?url=[parameters in array seperated by "/"]
 				 */
 				unset($this->_uri[1]);
+
 			} else {
 				return header("HTTP/1.0 404 Not Found");
 			}
@@ -163,10 +164,10 @@ class Router
 	 */
 	private function _parseUrl($name)
 	{
-
 		if (isset($_GET[$name])) {
 			return explode('/', filter_var(rtrim($_GET[$name], '/'), FILTER_SANITIZE_URL));
 		}
-		return FALSE;
+
+		return false;
 	}
 }

@@ -10,8 +10,7 @@ class DefaultController
         
     }
 
-    public
-            function index($param = 'null')
+    public function index($param = 'null')
     {
         echo $param;
     }

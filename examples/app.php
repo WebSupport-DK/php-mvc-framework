@@ -2,7 +2,7 @@
 require '../src/App.php';
 
 // Load class
-use WebSupportDK\PHPMvcFramework\App;
+use Datalaere\PHPMvcFramework\App;
 $app = App::load();
 
 // Set something

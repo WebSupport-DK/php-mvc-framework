@@ -10,13 +10,13 @@ require_once 'App/Controllers/DefaultController.php';
 require_once 'App/Controllers/ErrorController.php';
 require_once 'App/Controllers/HomeController.php';
 
-use WebSupportDK\PHPMvcFramework\App;
+use Datalaere\PHPMvcFramework\App;
 
 // Load app
 $app = App::load();
 
 // Config Router
-$app->set('Router', new WebSupportDK\PHPMvcFramework\Router);
+$app->set('Router', new Datalaere\PHPMvcFramework\Router);
 $app->get('Router')->setControllersPath('App/Controllers/');
 $app->get('Router')->setDefaultController('Default');
 $app->get('Router')->setDefaultAction('index');

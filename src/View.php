@@ -3,11 +3,11 @@
  * Class View
  * The part that handles all the output
  */
-namespace WebSupportDK\PHPMvcFramework;
+
+namespace Datalaere\PHPMvcFramework;
 
 class View
 {
-
 	// object instance 
 	private static $_instance = null;
 	public $template;
@@ -17,6 +17,7 @@ class View
 		if (!isset(self::$_instance)) {
 			self::$_instance = new View();
 		}
+		
 		return self::$_instance;
 	}
 

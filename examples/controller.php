@@ -6,23 +6,20 @@ require_once '../src/Model.php';
 require_once '../src/View.php';
 
 // use the controller class
-use WebSupportDK\PHPMvcFramework\Controller,
- WebSupportDK\PHPMvcFramework\Model;
+use Datalaere\PHPMvcFramework\Controller, Datalaere\PHPMvcFramework\Model;
 
 // we create a controller class that extends our main controlelr
 class TestController extends Controller
 {
 
-    public
-            function __construct()
+    public function __construct()
     {
         // we instantiate our parent controller class
         parent::__construct();
     }
 
     // public index for controller
-    public
-            function index()
+    public function index()
     {
         // data from db or else where. 
         // the model is an abstract example of how a model can be created.
@@ -35,8 +32,8 @@ class TestController extends Controller
             // location of view to render
             'views/index'
             
-                // the data we want to parse to the view
-                ), $data);
+        // the data we want to parse to the view
+        ), $data);
     }
 
 }

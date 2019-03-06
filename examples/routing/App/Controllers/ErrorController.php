@@ -9,14 +9,12 @@ class ErrorController
     {
         
     }
-    public
-            function index($code = 404)
+    public function index($code = 404)
     {
            echo $code;
     }
 
-    public
-            function code($code = 404)
+    public function code($code = 404)
     {
         echo $code;
     }

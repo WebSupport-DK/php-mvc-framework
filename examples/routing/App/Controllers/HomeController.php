@@ -10,8 +10,7 @@ class HomeController
         
     }
 
-    public
-            function index()
+    public function index()
     {
        print_r($this);
     }

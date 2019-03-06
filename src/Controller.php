@@ -5,10 +5,11 @@
  * 1. initialize a session
  * 2. check if the user is not logged in anymore (session timeout) but has a cookie
  */
-namespace WebSupportDK\PHPMvcFramework;
 
-use WebSupportDK\PHPMvcFramework\View;
-use WebSupportDK\PHPMvcFramework\App;
+namespace Datalaere\PHPMvcFramework;
+
+use Datalaere\PHPMvcFramework\View;
+use Datalaere\PHPMvcFramework\App;
 
 class Controller
 {
