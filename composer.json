@@ -1,8 +1,10 @@
 {
 	"name": "datalaere/php-mvc-framework",
 	"version": "dev-master",
-	"license": "MIT",
+	"type": "project",
 	"description": "Useful classes for creating a php mvc app",
+	"homepage": "https://github.com/datalaere/php-mvc-framework",
+	"license": "MIT",
 	"require": {
 		"php": ">=5.5.0",
 		"datalaere/php-scrud": "dev-master"
