@@ -11,28 +11,27 @@ namespace Datalaere\PHPMvcFramework;
 class TestModel extends Model
 {
 
-    // object instance 
+    // object instance
     protected static $_instance = null;
 
-    private
-            $_table,
-            $_attributes,
-            $_total,
-            $_pages,
-            $_perPage;
+    private $_table;
+    private $_attributes;
+    private $_total;
+    private $_pages;
+    private $_perPage;
 
     public function __construct()
     {
-        $this->_table      = 'TABLE_NAME';
+        $this->_table = 'TABLE_NAME';
         $this->_attributes = "$this->_table.ID";
-        $this->_db         = DB::load();
+        $this->_db = DB::load();
     }
 
     // init a singleton object of class
     public static function load()
     {
         if (!isset(self::$_instance)) {
-            self::$_instance = new Model( $_db ) ;
+            self::$_instance = new Model($_db) ;
         }
 
         return self::$_instance ;
@@ -42,17 +41,17 @@ class TestModel extends Model
      * Useful for changing different properties of the model during runtime,
      * like the db attributes etc.
      */
-    public function setModel( $name , $value )
+    public function setModel($name, $value)
     {
         $this->$name = $value ;
     }
 
-       public function search($query)
+    public function search($query)
     {
         return $this->_db->search($this->_table, $this->_attributes, $query, array($this->_attributes));
     }
 
-    // create 
+    // create
     public function create($fields = array())
     {
         return $this->_db->insert($this->_table, $fields);
@@ -69,7 +68,7 @@ class TestModel extends Model
         }
     }
 
-    // get page by specific search 
+    // get page by specific search
     public function get($where = array(array()), $paging = array(), $options = array())
     {
         if (!empty($paging)) {
@@ -113,11 +112,10 @@ class TestModel extends Model
 
     public function paging($start, $end, $max, $where = array(array()))
     {
-
         $page = isset($start) ? (int) $start : 1;
         $this->_perPage = isset($end) && $end <= $max ? (int) $end : 5;
 
-        $this->_pages = ($page > 1) ? ($page * $this->_perPage ) - $this->_perPage : 0;
+        $this->_pages = ($page > 1) ? ($page * $this->_perPage) - $this->_perPage : 0;
 
         $this->_total = (ceil($this->count($where)[0]->Total / $this->_perPage));
     }
@@ -134,7 +132,7 @@ class TestModel extends Model
     }
 
     // update page by id
-    public  function update($fields = array(), $ID = null)
+    public function update($fields = array(), $ID = null)
     {
         return $this->_db->update($this->_table, 'ID', $ID, $fields);
     }
@@ -144,5 +142,4 @@ class TestModel extends Model
     {
         return $this->_db->delete($this->_table, $where);
     }
-
 }

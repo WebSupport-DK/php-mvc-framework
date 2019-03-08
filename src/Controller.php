@@ -14,18 +14,19 @@ use Datalaere\PHPMvcFramework\App;
 class Controller
 {
 
-	/** @var View View The view object */
-	public $View, $App;
+    /** @var View View The view object */
+    public $View;
+    public $App;
 
-	/**
-	 * Construct the (base) controller. This happens when a real controller is constructed, like in
-	 * the constructor of IndexController when it says: parent::__construct();
-	 */
-	protected function __construct()
-	{
-		// create a view object to be able to use it inside a controller, like $this->View
-		$this->View = View::load();
-		// create a app object to be able to use it inside a controller, like $this->App
-		$this->App = App::load();
-	}
+    /**
+     * Construct the (base) controller. This happens when a real controller is constructed, like in
+     * the constructor of IndexController when it says: parent::__construct();
+     */
+    protected function __construct()
+    {
+        // create a view object to be able to use it inside a controller, like $this->View
+        $this->View = View::load();
+        // create a app object to be able to use it inside a controller, like $this->App
+        $this->App = App::load();
+    }
 }

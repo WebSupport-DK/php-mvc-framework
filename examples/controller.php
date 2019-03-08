@@ -6,12 +6,12 @@ require_once '../src/Model.php';
 require_once '../src/View.php';
 
 // use the controller class
-use Datalaere\PHPMvcFramework\Controller, Datalaere\PHPMvcFramework\Model;
+use Datalaere\PHPMvcFramework\Controller;
+use Datalaere\PHPMvcFramework\Model;
 
 // we create a controller class that extends our main controlelr
 class TestController extends Controller
 {
-
     public function __construct()
     {
         // we instantiate our parent controller class
@@ -21,7 +21,7 @@ class TestController extends Controller
     // public index for controller
     public function index()
     {
-        // data from db or else where. 
+        // data from db or else where.
         // the model is an abstract example of how a model can be created.
         // this one is set to function together with PHPSql\DB class.
         $data = Model::load()->read();
@@ -35,5 +35,4 @@ class TestController extends Controller
         // the data we want to parse to the view
         ), $data);
     }
-
 }
