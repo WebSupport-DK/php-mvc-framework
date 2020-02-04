@@ -3,16 +3,14 @@
  * The default model all other models extends for db access
  */
 
-namespace Datalaere\PHPMvcFramework;
+namespace PHP\MVC;
 
-use WebSupportDK\PHPScrud\DB;
-
-class Model
+abstract class Model
 {
-    protected $_DB;
+    protected $database;
 
-    protected function __construct()
+    public function __construct($database)
     {
-        $this->_DB = DB::load();
+        $this->database = $database;
     }
 }

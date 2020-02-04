@@ -4,21 +4,21 @@
  * The part that handles all the output
  */
 
-namespace Datalaere\PHPMvcFramework;
+namespace PHP\MVC;
 
 class View
 {
     // object instance
-    private static $_instance = null;
+    private static $instance;
     public $template;
 
-    public static function load()
+    public static function singleton()
     {
-        if (!isset(self::$_instance)) {
-            self::$_instance = new View();
+        if (!isset(self::$instance)) {
+            self::$instance = new View();
         }
         
-        return self::$_instance;
+        return self::$instance;
     }
 
     /**

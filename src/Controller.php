@@ -8,25 +8,23 @@
 
 namespace Datalaere\PHPMvcFramework;
 
-use Datalaere\PHPMvcFramework\View;
-use Datalaere\PHPMvcFramework\App;
-
-class Controller
+abstract class Controller
 {
 
     /** @var View View The view object */
-    public $View;
-    public $App;
+    protected $view;
+    protected $container;
 
     /**
      * Construct the (base) controller. This happens when a real controller is constructed, like in
      * the constructor of IndexController when it says: parent::__construct();
      */
-    protected function __construct()
+    public function __construct($view, $container)
     {
         // create a view object to be able to use it inside a controller, like $this->View
-        $this->View = View::load();
+        $this->view = $view;
+
         // create a app object to be able to use it inside a controller, like $this->App
-        $this->App = App::load();
+        $this->container = $container;
     }
 }

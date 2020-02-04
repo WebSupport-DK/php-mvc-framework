@@ -1,17 +1,23 @@
 {
-	"name": "datalaere/php-mvc-framework",
+	"name": "datalaere/php-mvc",
 	"version": "dev-master",
 	"type": "project",
 	"description": "Useful classes for creating a php mvc app",
-	"homepage": "https://github.com/datalaere/php-mvc-framework",
+	"homepage": "https://github.com/datalaere/php-mvc",
 	"license": "MIT",
+	"repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/datalaere/php-crud"
+        }
+    ],
 	"require": {
 		"php": ">=5.5.0",
-		"datalaere/php-scrud": "dev-master"
+		"datalaere/php-crud": "dev-master"
 	},
 	"autoload": {
 		"psr-4": {
-			"Datalaere\\PHPMvcFramework\\": "src/"
+			"PHP\\MVC\\": "src/"
 		}
 	}
 }
