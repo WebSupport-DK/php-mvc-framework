@@ -62,9 +62,7 @@ abstract class Controller
      */
     public function show($id)
     {
-        return view('notifications.show', [
-            'notifications' => tap(auth()->user()->unreadNotifications)->markAsRead()
-        ]);
+        //
     }
 
     /**
