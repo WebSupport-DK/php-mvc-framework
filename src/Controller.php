@@ -8,6 +8,10 @@
 
 namespace PHP\MVC;
 
+use PHP\MVC\View;
+
+use PHP\DI\Container;
+
 abstract class Controller
 {
 
@@ -19,13 +23,13 @@ abstract class Controller
      * Construct the (base) controller. This happens when a real controller is constructed, like in
      * the constructor of IndexController when it says: parent::__construct();
      */
-    public function __construct($view, $container)
+    public function __construct()
     {
         // create a view object to be able to use it inside a controller, like $this->View
-        $this->view = $view;
+        $this->view = View::singleton();
 
         // create a app object to be able to use it inside a controller, like $this->App
-        $this->container = $container;
+        $this->container = Container::singleton();
     }
 
     /**
