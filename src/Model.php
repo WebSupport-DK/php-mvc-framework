@@ -5,12 +5,14 @@
 
 namespace PHP\MVC;
 
+use PHP\Crud\Database;
+
 abstract class Model
 {
     protected $database;
 
-    public function __construct($database)
+    public function __construct()
     {
-        $this->database = $database;
+        $this->database = Database::singleton();
     }
 }
