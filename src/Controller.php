@@ -17,7 +17,7 @@ abstract class Controller
 
     /** @var View View The view object */
     protected $view;
-    protected $container;
+    protected $c;
 
     /**
      * Construct the (base) controller. This happens when a real controller is constructed, like in
@@ -28,8 +28,14 @@ abstract class Controller
         // create a view object to be able to use it inside a controller, like $this->View
         $this->view = View::singleton();
 
-        // create a app object to be able to use it inside a controller, like $this->App
-        $this->container = Container::singleton();
+        // create a container object to be able to use it inside a controller, like $this->c
+        $this->c = Container::singleton();
+    }
+
+    public function __get($property) {
+        if ($this->c->{$property}) {
+            return $this->c->{$property};
+        }
     }
 
     /**
