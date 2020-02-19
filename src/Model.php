@@ -9,10 +9,10 @@ use PHP\Crud\Database;
 
 abstract class Model
 {
-    protected $database;
+    protected $db;
 
     public function __construct()
     {
-        $this->database = Database::singleton();
+        $this->db = Database::singleton();
     }
 }
